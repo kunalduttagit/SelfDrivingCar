@@ -37,3 +37,11 @@ function polysIntersect(poly1, poly2){
     }
     return false
 }
+
+function getRGBA(value) {
+    const aplha = Math.abs(value)
+    const R = value < 0 ? 0 : 255
+    const G = R //overlap red to make yellow
+    const B = value > 0 ? 0 : 255
+    return "rgba(" +R+ "," +G+ "," +B+ "," +aplha+ ")";               
+}
