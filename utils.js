@@ -45,3 +45,10 @@ function getRGBA(value) {
     const B = value > 0 ? 0 : 255
     return "rgba(" +R+ "," +G+ "," +B+ "," +aplha+ ")";               
 }
+function getRGBAS(value, input) {
+    const alpha = Math.abs(value) * input
+    const R = value < 0 ? 0 : 255
+    const G = R //overlap red to make yellow
+    const B = value > 0 ? 0 : 255
+    return "rgba(" +R+ "," +G+ "," +B+ "," +alpha+ ")";               
+}

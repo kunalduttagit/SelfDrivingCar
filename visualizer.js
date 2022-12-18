@@ -47,7 +47,7 @@ class Visualizer{
                     top
                 )
                 ctx.lineWidth = 2
-                ctx.strokeStyle = getRGBA(weights[i][j])
+                ctx.strokeStyle = getRGBAS(weights[i][j], inputs[i])
                 ctx.stroke()
             }
         }
