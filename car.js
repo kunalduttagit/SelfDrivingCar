@@ -12,8 +12,13 @@ class Car{
         this.angle = 0; //Math.PI/2, to rotate a car if initialized horizontaly (but here vertical)
         this.damaged = false
 
+        this.useBrain = controlType == "AI";
+
         if(controlType != "DUMMY"){
             this.sensor = new Sensor(this);
+            this.brain = new NeuralNetwork(
+                [this.sensor.rayCount, 6, 4] //rayCount is input layer, 6 is hidden layer, 4 is output layer (left, rt, up, down)
+            )
         }
         this.controls = new Controls(controlType);
     }
@@ -24,8 +29,20 @@ class Car{
             this.polygon = this.#createPolygon()
             this.damaged = this.#assessDamage(roadBorders, traffic)
         }
-        if(this.sensor)
+        if(this.sensor){
             this.sensor.update(roadBorders, traffic);
+            const offsets = this.sensor.readings.map(
+                s => s == null ? 0 : 1-s.offset //so closer outputs have more importance, closer offset is more important, 1-smallOffset = big value
+            )
+            const outputs = NeuralNetwork.feedForward(offsets, this.brain)
+            //console.log(outputs)
+            if(this.useBrain){
+                this.controls.forward = outputs[0]
+                this.controls.left = outputs[1]
+                this.controls.right = outputs[2]
+                this.controls.reverse = outputs[3]
+            }
+        }
     }
 
     #assessDamage(roadBorders, traffic){

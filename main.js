@@ -3,7 +3,7 @@ myCanvas.width = 200;
 
 const ctx = myCanvas.getContext("2d");
 const road = new Road(myCanvas.width/2, myCanvas.width*0.9); //0.9 to move the lines a little closer to center, padding outside
-const car = new Car(road.getLaneCenter(1), 100, 30, 50, "KEYS");
+const car = new Car(road.getLaneCenter(1), 100, 30, 50, "AI");
 const traffic = [
     new Car(road.getLaneCenter(1), -100, 30, 50, "DUMMY", 2)
 ]
