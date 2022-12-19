@@ -1,5 +1,5 @@
 class Car{
-    constructor(x, y, width, height, controlType, maxSpeed = 3) {
+    constructor(x, y, width, height, controlType, maxSpeed = 3, color="blue") {
         this.x = x;
         this.y = y; //down y is positive, up is negative
         this.width = width;
@@ -21,6 +21,23 @@ class Car{
             )
         }
         this.controls = new Controls(controlType);
+
+        this.img = new Image();
+        this.img.src = "Resources/car.png"
+
+        this.mask = document.createElement("canvas")
+        this.mask.width = width
+        this.mask.height = height
+
+        const maskCtx = this.mask.getContext("2d")
+        this.img.onload = () => {
+            maskCtx.fillStyle = color
+            maskCtx.rect(0, 0, this.width, this.height)
+            maskCtx.fill()
+
+            maskCtx.globalCompositeOperation ="destination-atop"; //keep color only where it overlaps the car
+            maskCtx.drawImage(this.img, 0,0, this.width, this.height)
+        }
     }
 
     update(roadBorders, traffic){
@@ -117,21 +134,30 @@ class Car{
         this.y -= Math.cos(this.angle)*this.speed;
     }
 
-    draw(ctx, color, drawSensors = false){
-        if(this.damaged){
-            ctx.fillStyle = "gray"
-        }else{
-            ctx.fillStyle = color
-        }
-        ctx.beginPath();
-        ctx.moveTo(this.polygon[0].x, this.polygon[0].y);
-        for(let i=1; i<this.polygon.length; i++){ //starting from 1 bc we already moved to point 0
-            ctx.lineTo(this.polygon[i].x, this.polygon[i].y)
-        }
-        ctx.fill()
+    draw(ctx, drawSensors = false){
 
         if(this.sensor && drawSensors){
             this.sensor.draw(ctx);  //car draws it's own sensors
         }
+        
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(-this.angle)
+        if(!this.damaged){
+            ctx.drawImage(this.mask,
+                -this.width/2,
+                -this.height/2,
+                this.width,
+                this.height
+                )
+        }
+        ctx.globalCompositeOperation = "multiply";
+            ctx.drawImage(this.img,
+            -this.width/2,
+            -this.height/2,
+            this.width,
+            this.height
+            )
+        ctx.restore();
     }
 }

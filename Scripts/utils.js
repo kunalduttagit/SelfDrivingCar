@@ -52,3 +52,8 @@ function getRGBAS(value, input) {
     const B = value > 0 ? 0 : 255
     return "rgba(" +R+ "," +G+ "," +B+ "," +alpha+ ")";               
 }
+
+function getRandomColor(){
+    const hue = 290 + Math.random()*260; //290->550 hues, but not any hues of blue
+    return "hsl(" + hue + ", 100%, 60%)" //hue saturation and lightness //100% max saturation, 60% lightness, so light colored car, more contrast with black windows
+}
