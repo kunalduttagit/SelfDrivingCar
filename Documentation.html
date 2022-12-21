@@ -350,7 +350,7 @@ We then use a <code>drawLevel()</code> method to draw our canvas. Here for every
 <h2 id="optimising-neural-network">8. Optimising Neural Network</h2>
 <p>With all of the random neural network, and a single car, we can’t expect some miracle to happen. So we Optimise the code with few methods.</p>
 <h3 id="parallelisation">1. Parallelisation</h3>
-<p>So now we run many different cars, with sensors, and run them all in parallel all at once.<br>
+<p>So now we run many different cars, with sensors, and run them all in parallel all at once. Parallel or distributed deep learning can be helpful in reducing the effort taken by high computation. A typical neural network in such intensive computation takes a lot of time to get trained, by parallelisation, we can reduce that time and with our computation power, simulate n number of cars.<br><br>
 We’ll set <code>carCtx.globalAlpha = 0.2;</code> so that all cars remain transparent and set it to <code>1</code> for our main car.</p>
 <p>Let’s take a look on how do we find our main car, or here we call it the best car.</p>
 <h3 id="fitness-function">2. Fitness Function</h3>
