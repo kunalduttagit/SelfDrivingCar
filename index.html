@@ -9,12 +9,47 @@
 </head>
 <body>
     <canvas id="carCanvas"></canvas>
-    <div id="verticalButtons">
+
+    <div id="verticalButtons" class="verticalButtons">
         <button onclick="save()" class="save">💾</button>
+        <label for="save">Save</label>
         <button onclick="discard()" class="delete">🗑️</button>
+        <label for="save">Delete</label>
+
+
+        <div class='dropdown'>
+            🧬
+            <select name="mutationAmount" id="mutationAmount" 
+                onchange="localStorage.setItem('mutationAmount',this.value)">
+                <option value="0.1">0.1</option>
+                <option value="0.2">0.2</option>
+                <option value="0.3">0.3</option>
+                <option value="0.4">0.4</option>
+                <option value="0.5" selected>0.5</option>
+                <option value="0.6">0.6</option>
+                <option value="0.7">0.7</option>
+                <option value="0.8">0.8</option>
+                <option value="0.9">0.9</option>
+                <option value="1.0">1.0</option>
+            </select>
+        </div>
+        <label for="mutationAmount">Mutate</label>
+
+        <div class='dropdown'>
+            🚗
+            <select name="carCount" id="carCount" 
+                onchange="localStorage.setItem('carCount',this.value)">
+                <option value="1" selected>1</option>
+                <option value="10">10</option>
+                <option value="100">100</option>
+                <option value="1000">1000</option>
+            </select>
+        </div>
+        <label for="carCount">Cars</label>
     </div>
+
     <canvas id="networkCanvas"></canvas>
-    
+
     <script src="Scripts/visualizer.js"></script>
     <script src="Scripts/network.js"></script>
     <script src="Scripts/sensors.js"></script>

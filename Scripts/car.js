@@ -139,7 +139,7 @@ class Car{
         if(this.sensor && drawSensors){
             this.sensor.draw(ctx);  //car draws it's own sensors
         }
-        
+
         ctx.save();
         ctx.translate(this.x, this.y);
         ctx.rotate(-this.angle)
@@ -150,8 +150,8 @@ class Car{
                 this.width,
                 this.height
                 )
+            ctx.globalCompositeOperation = "multiply";
         }
-        ctx.globalCompositeOperation = "multiply";
             ctx.drawImage(this.img,
             -this.width/2,
             -this.height/2,

@@ -61,7 +61,7 @@ class Visualizer{
             ctx.fill();
 
             ctx.beginPath()
-            ctx.arc(x, bottom, nodeRadius*0.60, 0, Math.PI * 2);
+            ctx.arc(x, bottom, nodeRadius*0.60, 0, Math.PI * 2); //0.60 meeans 60% of node radius, smaller so that outside is visilble.
             ctx.fillStyle = getRGBA(inputs[i])
             ctx.fill();
         }

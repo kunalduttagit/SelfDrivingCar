@@ -1,3 +1,6 @@
+document.getElementById('carCount').value = localStorage.getItem("carCount") || 1;
+document.getElementById('mutationAmount').value = localStorage.getItem("mutationAmount") || '0.5';
+
 const carCanvas = document.getElementById('carCanvas');//carCanvas is global variable, no need query selector
 carCanvas.width = 200;
 
@@ -9,7 +12,7 @@ const networkCtx = networkCanvas.getContext("2d");
 
 const road = new Road(carCanvas.width/2, carCanvas.width*0.9); //0.9 to move the lines a little closer to center, padding outside
 
-const N = 1
+const N = Number(document.getElementById('carCount').value); //defaulted at one
 const cars = generateCars(N)
 let bestCar = cars[0]
 
@@ -77,7 +80,7 @@ function animate(time) {
         cars[i].update(road.borders, traffic);
     }
 
-    bestCar = cars.find(
+    bestCar = cars.find(    //fitness function
         c => c.y == Math.min(
             ...cars.map(c => c.y)
         )
@@ -91,15 +94,15 @@ function animate(time) {
     
     road.draw(carCtx);
     for(let i = 0; i < traffic.length; i++){
-        traffic[i].draw(carCtx, "red");
+        traffic[i].draw(carCtx);
     }
 
     carCtx.globalAlpha = 0.2;
     for(let i=0; i<cars.length; i++){
-        cars[i].draw(carCtx, "blue");
+        cars[i].draw(carCtx);
     }
     carCtx.globalAlpha = 1;
-    bestCar.draw(carCtx, "blue", true);
+    bestCar.draw(carCtx, true);
 
     carCtx.restore();
 

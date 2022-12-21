@@ -38,7 +38,7 @@
             A.y = mouse.y - Math.sin(angle)*radius
             B.x = mouse.x - Math.cos(angle)*radius
             B.y = mouse.y + Math.sin(angle)*radius
-            //angle += 0.02
+            angle += 0.02
 
             ctx.clearRect(0, 0, myCanvas.width, myCanvas.height)
             ctx.beginPath()
@@ -73,7 +73,8 @@
 
             const animatedI = getIntersectionWithAnimation(A, B, C, D)
             ctx.beginPath()
-            ctx.rect(myCanvas.width/2, 0, animatedI.bottom/100, 10) //divide by 100 bc function returns very large values, upto 1000s, not enough screen real estate
+            //ctx.rect(myCanvas.width/2, 0, animatedI.bottom/100, 10) //divide by 100 bc function returns very large values, upto 1000s, not enough screen real estate
+            ctx.rect(250, 0, animatedI.bottom/100, 10)
             ctx.fill()
 
             //t += 0.005 //if t > 1, then it's extrapolation, outisde scope dirctn of A-B
